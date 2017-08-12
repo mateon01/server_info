@@ -1,2 +1,6 @@
-# server_info
-Information for configuring Nginx, Tomcat, and Suricata
+Index
+======
+
+* When sending packets to ELB using Nginx Proxy_pass function
+* Host-based suricata configuration in AWS
+* Tomcat and Nginx settings for performance
