@@ -5,7 +5,6 @@ __Architecture__
 
 
 # Install Suricata
----
 
 Features
 ---
