@@ -38,6 +38,7 @@ SQL 최적화 기본 원리
 
   - Index Fast Full Scan
     - 말 그대로 Index Fast Full Scan은 Index Full Scan보다 빠르다. Index Fast Full Scan이 Index Full Scan보다 빠른 이유는, 인덱스 트리 구조를 무시하고 인덱스 세그먼트 전체를 Mulitiblock Read 방식으로 스캔하기 때문이다.
+
 |Index Full Scan|Index Fast Full Scan|
 |:-----------|:-------------------|
 |1. 인덱스 구조를 따라 스캔|1. 세그먼트 전체를 스캔|
