@@ -1,4 +1,5 @@
 syntax on
+set background=dark
 set cindent
 set nowrap
 set autoindent
@@ -20,10 +21,13 @@ set incsearch
 set hlsearch
 set encoding=utf8
 set nocompatible
+" Initialisation de pathogen
+set sessionoptions-=options
 set clipboard=unnamed
 set showmatch
-set showcmd 
-filetype off
+set showcmd
+colorscheme solarized
+filetype indent on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -47,7 +51,7 @@ Plugin 'taglist-plus'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mattn/emmet-vim'
@@ -61,6 +65,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 
+let g:solarized_termcolors=256
 let NERDTreeWinPos = "left"
 let NERDTreeChDirMode=1
 let NERDTreeShowHidden=1
@@ -73,6 +78,9 @@ let Tlist_Exit_OnlyWindow = 0
 let Tlist_Auto_Open = 0
 let Tlist_Use_Right_Window = 1
 let mapleader=","
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 nmap <F6> :NERDTree<CR>
 nmap <F8> :TlistToggle<CR>
 nmap <C-f> :NERDTreeFind<CR>
@@ -84,8 +92,14 @@ nmap <C-l> <C-w>l
 autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
 autocmd VimEnter * NERDTree
 let g:flake8_show_in_file=1
-let g:flake8_max_markers=500 
-filetype plugin indent on 
+let g:flake8_max_markers=500
+filetype plugin indent on
+
+"execute pathogen#infect()
+"if !filereadable(expand("%:p:h")."/Makefile")
+"	setlocal makeprg=gcc\ -o\ %<\ %
+"endif
+"map <F3> :w<CR> :make!<CR> :cw<CR>
 
 " Brief help
 " " :PluginList       - lists configured plugins
