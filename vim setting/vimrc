@@ -1,110 +1,98 @@
-syntax on
-set background=dark
-set cindent
-set nowrap
+set number            " line 표시를 해줍니다.
+set ai                    " auto indent
+set si                    " smart indent
+set cindent            " c style indent
+set shiftwidth=4      " shift를 4칸으로 ( >, >>, <, << 등의 명령어)
+set tabstop=4         " tab을 4칸으로
+set ignorecase      " 검색시 대소문자 구별하지않음
+set hlsearch         " 검색시 하이라이트(색상 강조)
+set expandtab       " tab 대신 띄어쓰기로
+set background=dark  " 검정배경을 사용할 때, (이 색상에 맞춰 문법 하이라이트 색상이 달라집니다.)
+set nocompatible   " 방향키로 이동가능
+set fileencodings=utf-8,euc-kr    " 파일인코딩 형식 지정
+set bs=indent,eol,start    " backspace 키 사용 가능
+set history=1000    " 명령어에 대한 히스토리를 1000개까지
+set ruler              " 상태표시줄에 커서의 위치 표시
+set nobackup      " 백업파일을 만들지 않음
+set title               " 제목을 표시
+set showmatch    " 매칭되는 괄호를 보여줌
+set nowrap         " 자동 줄바꿈 하지 않음
+set wmnu           " tab 자동완성시 가능한 목록을 보여줌
 set autoindent
-set smartindent
-set ruler
-set number
-set sm
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set splitbelow
-set splitright
-set foldmethod=indent
-set foldlevel=99
-set title
-set cursorline
-set nobackup
-set incsearch
-set hlsearch
-set encoding=utf8
-set nocompatible
-" Initialisation de pathogen
-set sessionoptions-=options
-set clipboard=unnamed
-set showmatch
+set nu
 set showcmd
-colorscheme solarized
+
+syntax on        " 문법 하이라이트 킴"
 filetype indent on
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'vim-scripts/indentpython.vim'
-"Bundle 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'https://github.com/nvie/vim-flake8'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'AutoComplPop'
-Plugin 'taglist-plus'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'VundleVim/vundle.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'bling/vim-airline'
+Plugin 'vcscommand.vim'
+Plugin 'textobj-user'
+Plugin 'mattn/vim-textobj-url'
+Plugin 'textobj-entire'
+Plugin 'textobj-line'
+Plugin 'vim-indent-object'
+Plugin 'batch.vim'
+Plugin 'terryma/vim-multiple-cursors'
 Plugin 'mattn/emmet-vim'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'taglist.vim'
-Plugin 'L9'
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'HTML.zip'
+Plugin 'matchit.zip'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'VisIncr'
+Plugin 'xuhdev/SingleCompile'
+Plugin 'Yggdroot/indentLine'
+Plugin 'mhinz/vim-signify'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'pangloss/vim-simplefold'
+call vundle#end()
 
-" Add all your plugins here (note older versions of Vundle used Bundleinstead of Plugin)
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-let g:solarized_termcolors=256
-let NERDTreeWinPos = "left"
-let NERDTreeChDirMode=1
-let NERDTreeShowHidden=1
+let g:SimpylFold_docstring_preview=1
+let g:multi_cursor_next_key=''
+let g:multi_cursor_prev_key=''
+let g:multi_cursor_skip_key=''
+let g:multi_cursor_quit_key=''
+let g:html_tag_case = 'lowercase'
+let g:no_html_tab_mapping = 'yes'
+let g:NERDTreeShowBookmarks = 1
+let NERDTreeWinPos='left'
+let NERDTreeHijackNetrw = 0
+function! GotoTree()
+    :NERDTree %:p:h
+endfunction
+let NERDTreeMapActivateNode=''
+let NERDTreeHijackNetrw=1
 let NERDTreeKeepTreeInNewTab=1
-let NERDTreeQuitOnOpen=0
-let g:nerdtree_tabs_open_on_gui_startup=0
-let Tlist_Ctags_Cmd = "/usr/bin/ctags"
-let Tlist_Inc_Winwidth = 0
-let Tlist_Exit_OnlyWindow = 0
-let Tlist_Auto_Open = 0
-let Tlist_Use_Right_Window = 1
-let mapleader=","
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-nmap <F6> :NERDTree<CR>
-nmap <F8> :TlistToggle<CR>
-nmap <C-f> :NERDTreeFind<CR>
-nmap <Leader>n :NERDTreeToggle<CR>
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+let g:indentLine_color_gui = '#385900'
+let g:indentLine_color_term = 100
+let g:indentLine_char = '¦'
+let g:indentLine_first_char = ''
+let g:indentLine_showFirstIndentLevel = 0
+let g:indentLine_enabled = 0
+let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'text', 'sh']
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
+let g:indentLine_maxLines = 3000
+nnoremap \il :IndentLinesToggle
+nmap <F6> :NERDTree <CR>
+nmap <C-f> :NERDTreeFind <CR>
+inoremap     :call align()
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+       let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+       let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+       Tabularize/|/l1
+       normal! 0
+       call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+
 autocmd VimEnter * NERDTree
-let g:flake8_show_in_file=1
-let g:flake8_max_markers=500
+
 filetype plugin indent on
-
-"execute pathogen#infect()
-"if !filereadable(expand("%:p:h")."/Makefile")
-"	setlocal makeprg=gcc\ -o\ %<\ %
-"endif
-"map <F3> :w<CR> :make!<CR> :cw<CR>
-
-" Brief help
-" " :PluginList       - lists configured plugins
-" " :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" " :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
